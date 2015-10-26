@@ -6,7 +6,7 @@ public class HandEvaluator {
 		Hand hand = new Hand();
 		String[] cards = rawHand.split(" ");
 		
-		// transformCardNames();
+		// obtaining cards
 		String cardName;
 		int[] values = new int[cards.length];
 		for (int i = 0; i < cards.length; i++) {
@@ -14,6 +14,7 @@ public class HandEvaluator {
 			values[i] = CardValue.getKeyOf(cardName);
 		}
 		
+		// setting cards occurence
 		int key;
 		for (int i = 0; i < values.length; i++) {
 			key = values[i];
@@ -23,7 +24,8 @@ public class HandEvaluator {
 				hand.putCard(key, 1);
 			}
 		}
-				
+			
+		// looking for flush
 		String color1, color2;
 		boolean isHandFlush = true;
 		for (int i=1; i<cards.length; i++) {
@@ -34,6 +36,7 @@ public class HandEvaluator {
 			}
 		}
 		
+		// looking for straight
 		int value1, value2;
 		boolean isHandStraight = true;
 		for (int i=1; i<cards.length; i++) {
@@ -44,34 +47,56 @@ public class HandEvaluator {
 			}
 		}
 
-		if (hand.getCardDistribution().containsValue(2) && hand.getCardDistribution().size() == 4) {
-			hand.setHandStrength(1);
-		}
+		checkPairs(hand);
+		checkTwoPairs(hand);
+		checkSet(hand);
+		checkStraight(hand, isHandStraight);
+		checkFlush(hand, isHandFlush);
+		checkFullHouse(hand);
+		checkFourOfAKind(hand);
+		
+		return hand;
+	}
 
-		if (hand.getCardDistribution().containsValue(2) && hand.getCardDistribution().size() == 3) {
-			hand.setHandStrength(2);
-		}
-
-		if (hand.getCardDistribution().containsValue(3) && hand.getCardDistribution().size() == 3) {
-			hand.setHandStrength(3);
-		}
-
-		if (hand.getCardDistribution().containsValue(3) && hand.getCardDistribution().containsValue(2)) {
-			hand.setHandStrength(6);
-		}
-
+	private static void checkFourOfAKind(Hand hand) {
 		if (hand.getCardDistribution().containsValue(4)) {
 			hand.setHandStrength(7);
 		}
-		
+	}
+
+	private static void checkFullHouse(Hand hand) {
+		if (hand.getCardDistribution().containsValue(3) && hand.getCardDistribution().containsValue(2)) {
+			hand.setHandStrength(6);
+		}
+	}
+
+	private static void checkFlush(Hand hand, boolean isHandFlush) {
 		if (isHandFlush) {
 			hand.setHandStrength(hand.getHandStrength()+5);
 		}
-		
+	}
+
+	private static void checkStraight(Hand hand, boolean isHandStraight) {
 		if (isHandStraight) {
 			hand.setHandStrength(hand.getHandStrength()+4);
 		}
-		
-		return hand;
+	}
+
+	private static void checkSet(Hand hand) {
+		if (hand.getCardDistribution().containsValue(3) && hand.getCardDistribution().size() == 3) {
+			hand.setHandStrength(3);
+		}
+	}
+
+	private static void checkTwoPairs(Hand hand) {
+		if (hand.getCardDistribution().containsValue(2) && hand.getCardDistribution().size() == 3) {
+			hand.setHandStrength(2);
+		}
+	}
+
+	private static void checkPairs(Hand hand) {
+		if (hand.getCardDistribution().containsValue(2) && hand.getCardDistribution().size() == 4) {
+			hand.setHandStrength(1);
+		}
 	}
 }
