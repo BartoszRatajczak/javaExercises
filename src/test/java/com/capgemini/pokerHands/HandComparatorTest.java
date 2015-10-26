@@ -38,7 +38,7 @@ public class HandComparatorTest {
 		assertThat(comparator.compareHands(evaluator.evaluateHand(rawHand1), evaluator.evaluateHand(rawHand2)))
 				.isEqualTo(2);
 	}
-	
+
 	@Test
 	public void flushAgainstFlushTest() {
 		String rawHand1 = "3C 2C 9C 8C TC";
@@ -46,7 +46,7 @@ public class HandComparatorTest {
 		assertThat(comparator.compareHands(evaluator.evaluateHand(rawHand1), evaluator.evaluateHand(rawHand2)))
 				.isEqualTo(2);
 	}
-	
+
 	@Test
 	public void threeOfAKindAgainstThreeOfAKindTest() {
 		String rawHand1 = "3D 3C 3H 8C TC";
@@ -54,17 +54,15 @@ public class HandComparatorTest {
 		assertThat(comparator.compareHands(evaluator.evaluateHand(rawHand1), evaluator.evaluateHand(rawHand2)))
 				.isEqualTo(1);
 	}
-	
+
 	@Test
 	public void fullHouseAgainstFullHouseTest() {
 		String rawHand1 = "3C 3S 3C 4H 4C";
 		String rawHand2 = "3C 3S 3C 2H 2C";
-		//String rawHand1 = "3C 3S 3C 6H 6C";
-		//String rawHand2 = "3C 3S 3C 4H 4C";
 		assertThat(comparator.compareHands(evaluator.evaluateHand(rawHand1), evaluator.evaluateHand(rawHand2)))
 				.isEqualTo(1);
 	}
-	
+
 	@Test
 	public void royalFlushAgainstRoyalFlushTest() {
 		String rawHand1 = "AC KC QC JC TC";
@@ -72,7 +70,7 @@ public class HandComparatorTest {
 		assertThat(comparator.compareHands(evaluator.evaluateHand(rawHand1), evaluator.evaluateHand(rawHand2)))
 				.isEqualTo(0);
 	}
-	
+
 	@Test
 	public void straightAgainstStraightTest() {
 		String rawHand1 = "9C 8C QC JC TC";
@@ -80,12 +78,17 @@ public class HandComparatorTest {
 		assertThat(comparator.compareHands(evaluator.evaluateHand(rawHand1), evaluator.evaluateHand(rawHand2)))
 				.isEqualTo(2);
 	}
-	
+
 	@Test
 	public void twoPairsAgainstTwoPairsTest() {
 		String rawHand1 = "2C 2S TC 4H 4C";
 		String rawHand2 = "3C 3S 9C 4H 4C";
 		assertThat(comparator.compareHands(evaluator.evaluateHand(rawHand1), evaluator.evaluateHand(rawHand2)))
 				.isEqualTo(2);
+	}
+	
+	@Test
+	public void thousandTestsFromFile() {
+		
 	}
 }
