@@ -20,13 +20,13 @@ public class HandEvaluator {
 		checkCardsColors();
 		checkCardsInterval();
 
-		checkPairs(hand);
-		checkTwoPairs(hand);
-		checkSet(hand);
-		checkStraight(hand, isHandStraight);
-		checkFlush(hand, isHandFlush);
-		checkFullHouse(hand);
-		checkFourOfAKind(hand);
+		checkPairs();
+		checkTwoPairs();
+		checkSet();
+		checkStraight();
+		checkFlush();
+		checkFullHouse();
+		checkFourOfAKind();
 
 		return hand;
 	}
@@ -76,43 +76,43 @@ public class HandEvaluator {
 		}
 	}
 
-	private void checkPairs(Hand hand) {
+	private void checkPairs() {
 		if (hand.getCardDistribution().containsValue(2) && hand.getCardDistribution().size() == 4) {
 			hand.setHandStrength(1);
 		}
 	}
 	
-	private void checkTwoPairs(Hand hand) {
+	private void checkTwoPairs() {
 		if (hand.getCardDistribution().containsValue(2) && hand.getCardDistribution().size() == 3) {
 			hand.setHandStrength(2);
 		}
 	}
 	
-	private void checkSet(Hand hand) {
+	private void checkSet() {
 		if (hand.getCardDistribution().containsValue(3) && hand.getCardDistribution().size() == 3) {
 			hand.setHandStrength(3);
 		}
 	}
 	
-	private void checkStraight(Hand hand, boolean isHandStraight) {
+	private void checkStraight() {
 		if (isHandStraight) {
 			hand.setHandStrength(hand.getHandStrength() + 4);
 		}
 	}
 	
-	private void checkFlush(Hand hand, boolean isHandFlush) {
+	private void checkFlush() {
 		if (isHandFlush) {
 			hand.setHandStrength(hand.getHandStrength() + 5);
 		}
 	}
 	
-	private void checkFullHouse(Hand hand) {
+	private void checkFullHouse() {
 		if (hand.getCardDistribution().containsValue(3) && hand.getCardDistribution().containsValue(2)) {
 			hand.setHandStrength(6);
 		}
 	}
 
-	private void checkFourOfAKind(Hand hand) {
+	private void checkFourOfAKind() {
 		if (hand.getCardDistribution().containsValue(4)) {
 			hand.setHandStrength(7);
 		}
