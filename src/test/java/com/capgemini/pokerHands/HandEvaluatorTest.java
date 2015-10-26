@@ -43,10 +43,9 @@ public class HandEvaluatorTest {
 		assertThat(HandEvaluator.evaluateHand(rawHand).getHandStrength()).isEqualTo(5);
 	}
 	
-	@Ignore
 	@Test
 	public void shouldDetectStraight() {
-		String rawHand = "AD 2C 3C 4S 5C";
+		String rawHand = "2D AC 3C 4S 5C";
 		assertThat(HandEvaluator.evaluateHand(rawHand).getHandStrength()).isEqualTo(4);
 	}
 	

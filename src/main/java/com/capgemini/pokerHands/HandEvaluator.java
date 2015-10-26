@@ -1,5 +1,8 @@
 package com.capgemini.pokerHands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HandEvaluator {
 
 	public static Hand evaluateHand(String rawHand) {
@@ -39,9 +42,10 @@ public class HandEvaluator {
 		// looking for straight
 		int value1, value2;
 		boolean isHandStraight = true;
-		for (int i=1; i<cards.length; i++) {
-			value1 = hand.getValues()[i-1];
-			value2 = hand.getValues()[i];
+		List<Integer> valuesList = new ArrayList<Integer>(hand.getCardDistribution().keySet());
+		for (int i=1; i<valuesList.size(); i++) {
+			value1 = valuesList.get(i-1);
+			value2 = valuesList.get(i);
 			if ((value2 - value1 != 1) && (value2 - value1 != 9)) {
 				isHandStraight = false;
 			}
