@@ -29,4 +29,8 @@ public class CardOccurence {
 	public void setOccurence(int occurence) {
 		this.occurence = occurence;
 	}
+	
+	public String toString() {
+		return card+" "+occurence;
+	}
 }

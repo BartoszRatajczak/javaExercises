@@ -38,24 +38,26 @@ public class HandComparator {
 
 	private void sortByOccurence() {
 		CardOccurence singleCard = new CardOccurence();
-		for (int i = 1; i < firstOccuList.size(); i++) {
-			if (firstOccuList.get(i).getOccurence() > firstOccuList.get(i - 1).getOccurence()) {
-				// exchange cards
-				singleCard.setCard(firstOccuList.get(i - 1).getCard());
-				singleCard.setOccurence(firstOccuList.get(i - 1).getOccurence());
-				firstOccuList.get(i - 1).setCard(firstOccuList.get(i).getCard());
-				firstOccuList.get(i - 1).setOccurence(firstOccuList.get(i).getOccurence());
-				firstOccuList.get(i).setCard(singleCard.getCard());
-				firstOccuList.get(i).setOccurence(singleCard.getOccurence());
-			}
-			if (secondOccuList.get(i).getOccurence() > secondOccuList.get(i - 1).getOccurence()) {
-				// exchange cards
-				singleCard.setCard(secondOccuList.get(i - 1).getCard());
-				singleCard.setOccurence(secondOccuList.get(i - 1).getOccurence());
-				secondOccuList.get(i - 1).setCard(secondOccuList.get(i).getCard());
-				secondOccuList.get(i - 1).setOccurence(secondOccuList.get(i).getOccurence());
-				secondOccuList.get(i).setCard(singleCard.getCard());
-				secondOccuList.get(i).setOccurence(singleCard.getOccurence());
+		for (int j=0; j<2; j++) {
+			for (int i = 1; i < firstOccuList.size(); i++) {
+				if (firstOccuList.get(i).getOccurence() < firstOccuList.get(i - 1).getOccurence()) {
+					// exchange cards
+					singleCard.setCard(firstOccuList.get(i - 1).getCard());
+					singleCard.setOccurence(firstOccuList.get(i - 1).getOccurence());
+					firstOccuList.get(i - 1).setCard(firstOccuList.get(i).getCard());
+					firstOccuList.get(i - 1).setOccurence(firstOccuList.get(i).getOccurence());
+					firstOccuList.get(i).setCard(singleCard.getCard());
+					firstOccuList.get(i).setOccurence(singleCard.getOccurence());
+				}
+				if (secondOccuList.get(i).getOccurence() < secondOccuList.get(i - 1).getOccurence()) {
+					// exchange cards
+					singleCard.setCard(secondOccuList.get(i - 1).getCard());
+					singleCard.setOccurence(secondOccuList.get(i - 1).getOccurence());
+					secondOccuList.get(i - 1).setCard(secondOccuList.get(i).getCard());
+					secondOccuList.get(i - 1).setOccurence(secondOccuList.get(i).getOccurence());
+					secondOccuList.get(i).setCard(singleCard.getCard());
+					secondOccuList.get(i).setOccurence(singleCard.getOccurence());
+				}
 			}
 		}
 	}
@@ -65,9 +67,11 @@ public class HandComparator {
 			if (firstOccuList.get(i).getOccurence() == secondOccuList.get(i).getOccurence()
 					&& firstOccuList.get(i).getCard() > secondOccuList.get(i).getCard()) {
 				result = 1;
+				break;
 			} else if (firstOccuList.get(i).getOccurence() == secondOccuList.get(i).getOccurence()
 					&& firstOccuList.get(i).getCard() < secondOccuList.get(i).getCard()) {
 				result = 2;
+				break;
 			}
 		}
 	}
